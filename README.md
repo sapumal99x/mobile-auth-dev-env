@@ -56,3 +56,16 @@ Both flows return a consistent payload shape:
 ## Optional demo repo
 
 `oauth2-pkce-mobile-demo` is optional and not required for startup.
+
+## Documentation
+
+See `/docs` for onboarding and deep technical references:
+
+- `docs/architecture.md`
+- `docs/setup-guide.md`
+- `docs/auth-flow.md`
+- `docs/pkce-deep-dive.md`
+- `docs/code-walkthrough.md`
+- `docs/api-reference.md`
+- `docs/debugging-guide.md`
+- `docs/glossary.md`
