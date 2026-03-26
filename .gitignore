@@ -1,5 +1,6 @@
 node_modules
 .DS_Store
+apps/mobile-app
 apps/mobile-app/node_modules
 apps/mobile-app/.expo
 infra/.env
