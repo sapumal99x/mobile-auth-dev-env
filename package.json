@@ -1,0 +1,9 @@
+{
+  "name": "mobile-auth-dev-env",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "update": "bash ./scripts/update.sh",
+    "start": "bash ./scripts/start.sh"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "variables": {
+    "fusionauthDomain": "http://localhost:9011",
+    "clientId": "mobile-app-client",
+    "redirectUri": "myapp://callback",
+    "applicationId": "11111111-1111-1111-1111-111111111111",
+    "testEmail": "user@99x.io",
+    "testPassword": "ign1teIsAwes0m3"
+  },
+  "apiKeys": [
+    {
+      "key": "00000000-0000-0000-0000-000000000001",
+      "description": "Development key",
+      "permissions": {
+        "endpoints": {
+          "/api/*": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        }
+      }
+    }
+  ],
+  "requests": [
+    {
+      "method": "POST",
+      "url": "/api/tenant",
+      "body": {
+        "tenant": {
+          "name": "Mobile Auth Tenant"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/api/application/#{applicationId}",
+      "body": {
+        "application": {
+          "name": "Mobile App",
+          "oauthConfiguration": {
+            "authorizedRedirectURLs": [
+              "#{redirectUri}"
+            ],
+            "clientId": "#{clientId}",
+            "enabledGrants": [
+              "authorization_code",
+              "refresh_token"
+            ],
+            "generateRefreshTokens": true,
+            "requireRegistration": false
+          }
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/api/user",
+      "body": {
+        "user": {
+          "active": true,
+          "email": "#{testEmail}",
+          "password": "#{testPassword}",
+          "firstName": "Demo",
+          "lastName": "User"
+        },
+        "registration": {
+          "applicationId": "#{applicationId}",
+          "roles": [
+            "user"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: fusionauth-db
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - fusionauth-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME} -d ${DATABASE_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    ports:
+      - "5432:5432"
+
+  fusionauth:
+    image: fusionauth/fusionauth-app:latest
+    container_name: fusionauth
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: ${FUSIONAUTH_DATABASE_URL}
+      DATABASE_ROOT_USERNAME: ${DATABASE_ROOT_USERNAME}
+      DATABASE_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      DATABASE_USERNAME: ${FUSIONAUTH_DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${FUSIONAUTH_DATABASE_PASSWORD}
+      FUSIONAUTH_APP_MEMORY: ${FUSIONAUTH_APP_MEMORY}
+      FUSIONAUTH_APP_RUNTIME_MODE: ${FUSIONAUTH_APP_RUNTIME_MODE}
+      FUSIONAUTH_APP_URL: ${FUSIONAUTH_URL}
+      FUSIONAUTH_APP_KICKSTART_FILE: ${FUSIONAUTH_APP_KICKSTART_FILE}
+      SEARCH_TYPE: ${FUSIONAUTH_SEARCH_ENGINE_TYPE}
+    volumes:
+      - ./kickstart:/usr/local/fusionauth/kickstart
+    ports:
+      - "9011:9011"
+
+volumes:
+  fusionauth-db-data:
