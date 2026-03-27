@@ -7,6 +7,8 @@
 3. Confirm mobile config client ID and redirect URI match FusionAuth application.
 4. Confirm auth mode toggle is set as expected in Settings.
 
+If testing FusionAuth Admin UI access, use the seeded admin account instead of the app user account.
+
 ## Common Issues
 
 ### 1) `invalid_client`

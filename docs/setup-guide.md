@@ -50,9 +50,13 @@ npm run ios
 
 - redirect URI: `myapp://callback`
 - OAuth client/application ID: `11111111-1111-1111-1111-111111111111`
+- FusionAuth admin UI user:
+  - email: `admin@99x.io`
+  - password: `Adm1nIsAwes0m3!`
 - test user:
   - email: `user@99x.io`
   - password: `ign1teIsAwes0m3`
+  - scope: app login testing only (not admin UI)
 
 ## Verification
 

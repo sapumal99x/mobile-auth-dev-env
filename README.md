@@ -57,6 +57,13 @@ Both flows return a consistent payload shape:
 
 `oauth2-pkce-mobile-demo` is optional and not required for startup.
 
+## Seeded Credentials
+
+- FusionAuth admin UI:
+  - `admin@99x.io` / `Adm1nIsAwes0m3!`
+- Mobile app test user:
+  - `user@99x.io` / `ign1teIsAwes0m3`
+
 ## Documentation
 
 See `/docs` for onboarding and deep technical references:

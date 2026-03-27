@@ -3,6 +3,8 @@
     "fusionauthDomain": "http://localhost:9011",
     "redirectUri": "myapp://callback",
     "applicationId": "11111111-1111-1111-1111-111111111111",
+    "adminEmail": "admin@99x.io",
+    "adminPassword": "Adm1nIsAwes0m3!",
     "testEmail": "user@99x.io",
     "testPassword": "ign1teIsAwes0m3"
   },
@@ -33,6 +35,25 @@
             "requireClientAuthentication": false,
             "requireRegistration": false
           }
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "url": "/api/user/registration",
+      "body": {
+        "user": {
+          "active": true,
+          "email": "#{adminEmail}",
+          "password": "#{adminPassword}",
+          "firstName": "FusionAuth",
+          "lastName": "Admin"
+        },
+        "registration": {
+          "applicationId": "#{FUSIONAUTH_APPLICATION_ID}",
+          "roles": [
+            "admin"
+          ]
         }
       }
     },
