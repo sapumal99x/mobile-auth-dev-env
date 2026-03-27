@@ -8,6 +8,7 @@ The app supports two login modes selected from Settings:
 - `fusionauth`: OAuth 2.0 Authorization Code + PKCE
 
 Mode is persisted and read by `getAuthMode()`.
+Demo Mode overrides all other modes, so enabling it forces local mock login behavior.
 
 ## End-to-End Login Sequence
 

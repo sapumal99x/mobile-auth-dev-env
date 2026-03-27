@@ -1,60 +1,59 @@
 # PKCE Deep Dive
 
-## What PKCE Is
+PKCE is central to this project's real OAuth mode.
 
-PKCE (Proof Key for Code Exchange) extends OAuth 2.0 Authorization Code flow for public clients (mobile apps, SPAs) that cannot safely store a client secret.
+## Why PKCE Is Required Here
 
-Instead of trusting only the authorization code, the token endpoint also verifies proof that the same client initiated the flow.
+This mobile app is a public client (no trusted client secret on device).  
+Without PKCE, an intercepted authorization code could be replayed by an attacker at `/oauth2/token`.
 
-## Why It Exists
+PKCE prevents this by binding token exchange to a one-time secret (`code_verifier`) known only to the initiating app instance.
 
-Without PKCE, an intercepted authorization code could be exchanged by an attacker.
+## Current Implementation
 
-With PKCE:
+Code locations:
 
-- app creates a random `code_verifier`
-- app sends hashed `code_challenge` in authorize request
-- token exchange succeeds only when original `code_verifier` is presented
+- `apps/mobile-app/app/services/auth/pkce.ts`
+- `apps/mobile-app/app/services/auth/fusionauth.ts`
 
-## Security Benefits
+### `code_verifier`
 
-- Mitigates code interception replay
-- Reduces risk in custom/deep-link redirect handlers
-- Safe for public/native clients without embedded secret
+- Generated in `createPkcePair()` using random bytes over RFC-friendly charset.
+- Length in current implementation: 64 chars.
+- Lifetime: in-memory only, held in function scope until token exchange.
 
-## Verifier vs Challenge
+### `code_challenge`
 
-- `code_verifier`:
-  - high-entropy random string
-  - kept only on client until token exchange
-- `code_challenge`:
-  - `BASE64URL(SHA256(code_verifier))`
-  - sent to authorization endpoint
+- Derived from verifier:
+  1. SHA256 digest
+  2. base64 encoding
+  3. base64url normalization (`+` -> `-`, `/` -> `_`, trim `=`)
+- Sent to `/oauth2/authorize` with:
+  - `code_challenge=<value>`
+  - `code_challenge_method=S256`
 
-## PKCE Diagram
+### Verification in FusionAuth
+
+At `/oauth2/token`, FusionAuth recomputes challenge from submitted `code_verifier` and compares it with challenge from authorize request.  
+Mismatch results in `invalid_pkce_code_challenge` or `invalid_grant`.
+
+## Security Risks Without PKCE
+
+- Authorization code interception replay
+- Increased deep-link interception risk in mobile contexts
+- Confidential-client assumptions leaking into public mobile architecture
+
+## Diagram
 
 ```mermaid
-flowchart TD
-  A[Generate code_verifier] --> B[SHA-256 hash]
-  B --> C[Base64URL encode]
-  C --> D[code_challenge]
-  D --> E[/oauth2/authorize]
-  A --> F[/oauth2/token as code_verifier]
-  E --> G[FusionAuth compares verifier->challenge]
-  F --> G
-  G --> H[Issue tokens if match]
+flowchart LR
+    A[code_verifier] --> B[SHA256]
+    B --> C[base64url encode]
+    C --> D[code_challenge]
 ```
 
-## Project Implementation
+## Practical Debug Notes
 
-In `pkce.ts`:
-
-- `createPkcePair()` returns `{ verifier, challenge }`
-- `createOAuthState()` creates CSRF state nonce
-
-In `fusionauth.ts`:
-
-- challenge is sent in authorize URL
-- verifier is sent during token exchange
-
-If these do not match, FusionAuth returns `invalid_pkce_code_challenge`.
+- If authorize succeeds but token fails, verify the same verifier instance is used.
+- Ensure no mutation/encoding mismatch between generated and submitted verifier.
+- Confirm `code_challenge_method` remains `S256` on authorize request.

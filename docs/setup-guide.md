@@ -45,6 +45,21 @@ npm run ios
 - mobile config:
   - `app/config/config.dev.ts`
   - `app/config/config.prod.ts`
+ - mobile env:
+   - `apps/mobile-app/.env`
+
+## Mobile Environment Variables
+
+`apps/mobile-app/.env`:
+
+```env
+EXPO_PUBLIC_FUSIONAUTH_URL=http://localhost:9011
+EXPO_PUBLIC_CLIENT_ID=11111111-1111-1111-1111-111111111111
+EXPO_PUBLIC_REDIRECT_URI=myapp://callback
+EXPO_PUBLIC_AUTH_MODE=mock
+```
+
+These values drive OAuth endpoint selection and default auth mode fallback.
 
 ## Expected Seeded Values
 

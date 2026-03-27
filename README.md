@@ -68,11 +68,21 @@ Both flows return a consistent payload shape:
 
 See `/docs` for onboarding and deep technical references:
 
-- `docs/architecture.md`
 - `docs/setup-guide.md`
-- `docs/auth-flow.md`
-- `docs/pkce-deep-dive.md`
+- `docs/auth-modes.md`
 - `docs/code-walkthrough.md`
-- `docs/api-reference.md`
-- `docs/debugging-guide.md`
+- `docs/auth-flow-deep-dive.md`
+- `docs/pkce-deep-dive.md`
+- `docs/endpoints-reference.md`
+- `docs/token-lifecycle.md`
+- `docs/mobile-integration.md`
+- `docs/architecture-diagram.md`
+- `docs/debugging-auth.md`
 - `docs/glossary.md`
+
+Legacy docs (kept for continuity):
+
+- `docs/auth-flow.md`
+- `docs/api-reference.md`
+- `docs/architecture.md`
+- `docs/debugging-guide.md`
