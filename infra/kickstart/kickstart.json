@@ -2,11 +2,11 @@
   "variables": {
     "fusionauthDomain": "http://localhost:9011",
     "redirectUri": "myapp://callback",
-    "applicationId": "11111111-1111-1111-1111-111111111111",
-    "adminEmail": "admin@99x.io",
-    "adminPassword": "Adm1nIsAwes0m3!",
-    "testEmail": "user@99x.io",
-    "testPassword": "ign1teIsAwes0m3"
+    "applicationId": "__SET_FUSIONAUTH_CLIENT_ID__",
+    "adminEmail": "__SET_ADMIN_EMAIL__",
+    "adminPassword": "__SET_ADMIN_PASSWORD__",
+    "testEmail": "__SET_TEST_EMAIL__",
+    "testPassword": "__SET_TEST_PASSWORD__"
   },
   "apiKeys": [
     {

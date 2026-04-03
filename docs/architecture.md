@@ -6,7 +6,6 @@ This repository provides a complete local development environment for a mobile a
 
 - React Native mobile app with two auth modes (mock and FusionAuth)
 - FusionAuth + PostgreSQL in Docker
-- Optional BFF placeholder for future backend mediation
 
 The system is designed so developers can run everything locally with one command and switch auth behavior without rewriting app logic.
 
@@ -17,7 +16,6 @@ The system is designed so developers can run everything locally with one command
 - `infra/kickstart/kickstart.json`: initial FusionAuth bootstrap
 - `scripts/update.sh`: clones/updates mobile app and checks out feature branch
 - `scripts/start.sh`: end-to-end startup orchestration
-- `apps/bff`: optional BFF placeholder
 
 ## Architecture Diagram
 

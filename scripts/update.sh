@@ -6,7 +6,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 MOBILE_REPO_URL="https://github.com/sapumal99x/rn-mobile-boilerplate.git"
 MOBILE_DIR="${ROOT_DIR}/apps/mobile-app"
 
-mkdir -p "${ROOT_DIR}/apps" "${ROOT_DIR}/bff"
+mkdir -p "${ROOT_DIR}/apps"
 
 if [[ ! -d "${MOBILE_DIR}/.git" ]]; then
   git clone "${MOBILE_REPO_URL}" "${MOBILE_DIR}"

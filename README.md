@@ -11,7 +11,6 @@ Full local setup for a React Native mobile app with two authentication paths:
 ```
 apps/
   mobile-app/
-  bff/
 infra/
   docker-compose.yml
   kickstart/
@@ -36,6 +35,15 @@ This will:
 3. Wait for startup
 4. Launch the mobile app
 
+## Environment Setup
+
+Do not commit real credentials or secrets.
+
+- Copy root environment template:
+  - `cp .env.example .env`
+- Copy mobile environment template:
+  - `cp apps/mobile-app/.env.example apps/mobile-app/.env`
+
 ## Auth mode toggle
 
 In the mobile app Settings screen, use **Enable FusionAuth Login**.
@@ -53,16 +61,43 @@ Both flows return a consistent payload shape:
 }
 ```
 
+## Mobile App Architecture (Current)
+
+The mobile app is intentionally reduced to a minimal baseline:
+
+- `Login`
+- `Home` (Dashboard-style screen)
+- `Settings`
+
+Bottom tabs include only:
+
+- `Home`
+- `Settings`
+
+Removed mobile features:
+
+- Payments
+- Scan
+- History
+- Invoice
+
+State management is React state plus focused Context providers.  
+Future direction is adopting TanStack Query for server state when web/mobile monorepo integration begins.
+
 ## Optional demo repo
 
 `oauth2-pkce-mobile-demo` is optional and not required for startup.
 
 ## Seeded Credentials
 
+Credentials are environment-specific and must not be hardcoded in source control.
+
 - FusionAuth admin UI:
-  - `admin@99x.io` / `Adm1nIsAwes0m3!`
+  - email: `__SET_ADMIN_EMAIL__`
+  - password: `__SET_ADMIN_PASSWORD__`
 - Mobile app test user:
-  - `user@99x.io` / `ign1teIsAwes0m3`
+  - email: `__SET_TEST_EMAIL__`
+  - password: `__SET_TEST_PASSWORD__`
 
 ## Documentation
 

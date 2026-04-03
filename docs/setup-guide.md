@@ -54,8 +54,9 @@ npm run ios
 
 ```env
 EXPO_PUBLIC_FUSIONAUTH_URL=http://localhost:9011
-EXPO_PUBLIC_CLIENT_ID=11111111-1111-1111-1111-111111111111
+EXPO_PUBLIC_CLIENT_ID=__SET_FUSIONAUTH_CLIENT_ID__
 EXPO_PUBLIC_REDIRECT_URI=myapp://callback
+EXPO_PUBLIC_GOOGLE_IDP_ID=__SET_GOOGLE_IDP_ID__
 EXPO_PUBLIC_AUTH_MODE=mock
 ```
 
@@ -64,13 +65,13 @@ These values drive OAuth endpoint selection and default auth mode fallback.
 ## Expected Seeded Values
 
 - redirect URI: `myapp://callback`
-- OAuth client/application ID: `11111111-1111-1111-1111-111111111111`
+- OAuth client/application ID: `__SET_FUSIONAUTH_CLIENT_ID__`
 - FusionAuth admin UI user:
-  - email: `admin@99x.io`
-  - password: `Adm1nIsAwes0m3!`
+  - email: `__SET_ADMIN_EMAIL__`
+  - password: `__SET_ADMIN_PASSWORD__`
 - test user:
-  - email: `user@99x.io`
-  - password: `ign1teIsAwes0m3`
+  - email: `__SET_TEST_EMAIL__`
+  - password: `__SET_TEST_PASSWORD__`
   - scope: app login testing only (not admin UI)
 
 ## Verification
