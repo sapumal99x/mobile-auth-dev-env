@@ -63,7 +63,7 @@ Both flows return a consistent payload shape:
 
 ## Mobile App Architecture (Current)
 
-The mobile app is intentionally reduced to a minimal baseline:
+The mobile app currently provides:
 
 - `Login`
 - `Home` (Dashboard-style screen)
@@ -74,15 +74,7 @@ Bottom tabs include only:
 - `Home`
 - `Settings`
 
-Removed mobile features:
-
-- Payments
-- Scan
-- History
-- Invoice
-
-State management is React state plus focused Context providers.  
-Future direction is adopting TanStack Query for server state when web/mobile monorepo integration begins.
+State management is React state plus focused Context providers, with TanStack Query for server state.
 
 ## Optional demo repo
 
@@ -115,9 +107,3 @@ See `/docs` for onboarding and deep technical references:
 - `docs/debugging-auth.md`
 - `docs/glossary.md`
 
-Legacy docs (kept for continuity):
-
-- `docs/auth-flow.md`
-- `docs/api-reference.md`
-- `docs/architecture.md`
-- `docs/debugging-guide.md`
